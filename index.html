@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>text to js nonsense</title>
+	<meta lang="eng">
+	<style>
+		#output::before {
+			content: "JS code return: ";
+		}
+		#output::before {
+			content: "JS code: ";
+		}
+		textarea{
+			width: 400px;
+			height: 100px;
+		}
+	</style>
+	</head>
+	<body>
+		<textarea placeholder="Here write text to convert" onkeyup="convert()" autofocus></textarea>
+		<p id="output"></p>
+		<p id="jsoutput"></p>
+	</body>
+	<script>
+		var slovnik={
+			"a":"(false+[])[false+true]",
+			"b":"(typeof [])[true+false]",
+			"c":"(typeof [])[(true+true)*(true+true)]",
+			"d":"([][false]+[])[true+true]",
+			"e":"(true+[])[true+true+true]",
+			"f":"(false+[])[false+false]",
+			"g":"(typeof ([][false]+[]))[((true+true)**(true+true)+true)]",
+			"h":"parseInt(((true+false)+[])+(((true+true)**(true+true+true)-true)+[])).toString(((true+true+true)+[])+((true+true+true)*(true+true)+[]))",
+			"i":"(true/false+[])[true+true+true]",
+			"j":"(typeof [])[true+true]",
+			"k":"parseInt(((true+true)+[])+((false+false)+[])).toString(((true+true+true)+[])+((true+true+true)*(true+true)+[]))",
+			"l":"(true/false+[])[false+false]",
+			"m":"(typeof (false+true))[true+true]",
+			"n":"([][false]+[])[true+false]",
+			"o":"(typeof [])[true-true]",
+			"p":"parseInt(((true+true)+[])+((true+true+true+true+true)+[])).toString(((true+true+true)+[])+((true+true+true)*(true+true)+[]))",
+			"q":"parseInt(((true+true)+[])+(((true+true+true)*(true+true))+[])).toString(((true+true+true)+[])+((true+true+true)*(true+true)+[]))",
+			"r":"(typeof ([][false]+[]))[true+true]",
+			"s":"(typeof ([][false]+[]))[false+false]",
+			"t":"(true+[])[false+false]",
+			"u":"([][false]+[])[false+false]",
+			"v":"parseInt(((true+true+true)+[])+((true+false)+[])).toString(((true+true+true)+[])+((true+true+true)*(true+true)+[]))",
+			"w":"parseInt(((true+true+true)+[])+((true+true)+[])).toString(((true+true+true)+[])+((true+true+true)*(true+true)+[]))",
+			"x":"parseInt(((true+true+true)+[])+((true+true+true)+[])).toString(((true+true+true)+[])+((true+true+true)*(true+true)+[]))",
+			"y":"(true/false+[])[((true+true)**(true+true+true)-true)]",
+			"z":"parseInt(((true+true+true)+[])+(((true+true)*(true+true)+true)+[])).toString(((true+true+true)+[])+((true+true+true)*(true+true)+[]))",
+			"0":"(false+false)",
+			"1":"(false+true)",
+			"2":"(true+true)",
+			"3":"(true+true+true)",
+			"4":"(true+true)**(true+true)",
+			"5":"((true+true)**(true+true)+true)",
+			"6":"(true+true+true)*(true+true)",
+			"7":"((true+true)**(true+true+true)-true)",
+			"8":"(true+true)**(true+true+true)",
+			"9":"(true+true+true)**(true+true)",
+			"-":"(false-true+[])[(false+false)]",
+			".":"(false-true+[])[(false+false)]+(false-true+[])[(false+false)]"
+		}
+		links={
+			" ":"-",
+			"ě":"e",
+			"š":"s",
+			"č":"c",
+			"ř":"r",
+			"ž":"z",
+			"ý":"y",
+			"á":"a",
+			"í":"i",
+			"é":"e",
+			"ď":"d",
+			"ť":"t",
+			"ň":"n",
+			"ú":"ú",
+			"ů":"ů"
+		}
+		function convert(){
+			text="("
+			bool=true
+			input=document.querySelector("textarea").value.replace(". ",".")
+			for(i of input){
+				if(typeof slovnik[i.toLocaleLowerCase()]=="undefined"&&typeof links[i.toLocaleLowerCase()]!="undefined"){
+					i=links[i.toLocaleLowerCase()]
+				}
+				if(typeof slovnik[i.toLocaleLowerCase()]!="undefined"){
+					if(bool){
+						bool=false
+					}else{
+						text+="+"
+					}
+					text+=slovnik[i.toLocaleLowerCase()]
+				}
+			}
+			document.querySelector("#jsoutput").innerText=text+")"
+			document.querySelector("#output").innerText=eval(text+")")
+		}
+	</script>
+</html>
