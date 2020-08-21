@@ -122,7 +122,12 @@
 		function convert(){
 			text="("
 			bool=true
-			input=document.querySelector("textarea").value.replace(". ",".")
+			input=document.querySelector("textarea").value
+			sinput=""
+			while(sinput!=input){
+				sinput=input
+				input=input.replace(". ",".").replace(" .",".").replace("  "," ")
+			}
 			for(i of input){
 				if(typeof slovnik[i.toLocaleLowerCase()]=="undefined"&&typeof links[i.toLocaleLowerCase()]!="undefined"){
 					i=links[i.toLocaleLowerCase()]
